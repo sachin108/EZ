@@ -1,0 +1,40 @@
+1. Multi-Cloud Architecture
+    It ensures fault tolerance, high availability, and disaster recovery by distributing resources 
+    across multiple cloud providers (e.g., AWS, Google Cloud, Azure, Huwaei, etc).
+    It will also avoid vendor lock in.
+
+2. CDNs (Content Delivery Networks)
+    CDNs cache static content closer to users, improving download/upload speeds and reducing latency.
+
+3. Kubernetes for Dynamic Infrastructure Scaling
+    It provides automated scaling, resource management, and orchestration based on traffic load, so 
+    flexibility to scale infrastructure dynamically and efficiently based on real-time demand.
+
+4. Message Queues & Celery
+    Message queues enable asynchronous communication between microservices, allowing tasks to be queued 
+    and processed in the background, improving the responsiveness of the system. Celery is a distributed 
+    task queue that integrates well with message brokers to manage background tasks such as email verification, 
+    file processing, and file downloading.
+
+5. Caching Layer
+    Caching frequently accessed data reduces latency and offloads traffic from backend systems.
+    Benefits: Faster access to files and reduced load on databases. 
+
+6. Load Balancers
+    Distribute incoming traffic evenly across servers to prevent overloads and improve fault tolerance.
+
+7. Auto-Scaling and Traffic Throttling
+    Auto-scaling ensures the system adjusts to varying traffic levels, and traffic throttling prevents 
+    system overloads.
+
+8. Docker
+    Docker ensures that the application runs consistently across different environments 
+    (local, staging, production), minimizing issues related to system dependencies.
+
+    Allows for easy scaling by creating and managing multiple containers, ideal for microservices 
+    and handling traffic spikes.
+    
+    Containers can run on any platform that supports Docker, making it easy to move between different environments or 
+    cloud providers.
+    
+    It integrates seamlessly with continuous integration and delivery pipelines, enabling automated testing and deployment. 

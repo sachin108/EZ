@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Files</title>
+</head>
+<body>
+    <h1>Available Files (Client User)</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Download Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file, signed_url in files_and_urls %}
+                <tr>
+                    <td>{{ file.file.name }}</td>
+                    <td><a href="{% url 'download_file' signed_file_id=signed_url %}">Download</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>New here? <a href="{% url 'signin' %}">SignOut</a></p>
+</body>
+</html>

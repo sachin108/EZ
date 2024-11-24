@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>
+        /* Add some spacing between form elements */
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;  /* Adds space between form fields */
+            box-sizing: border-box;  /* Ensures padding is included in element width */
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        
+        <label for="user_type">User Type:</label>
+        <select id="user_type" name="user_type">
+            <option value="ops">Ops User</option>
+            <option value="client">Client User</option>
+        </select><br><br>
+        
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+</body>
+</html>
