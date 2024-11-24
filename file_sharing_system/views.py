@@ -6,6 +6,51 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from django.core.signing import Signer, BadSignature
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import login
+
+from django.utils.crypto import get_random_string
+
+def signup_page(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        user_type = request.POST['user_type']
+
+        user = Person.objects.create_user(username=username, email=email, password=password, user_type=user_type)
+        user.is_active = False  
+        user.save()
+        token = get_random_string(32)  
+        user.verification_token = token
+        user.save()
+
+        verification_link = request.build_absolute_uri(f"/verify/{user.id}/{token}/")
+
+        subject = "Verify Your Email"
+        message = f"Hi {username},\n\nClick the link to verify your email: {verification_link}"
+        send_mail(subject, message, 'your-email@gmail.com', [email])
+
+        return redirect('signin')
+
+    return render(request, 'signup.html')
+
+def email_verification(request, user_id, token):
+    user = get_object_or_404(Person, id=user_id)
+
+    if user.verification_token == token:
+        print(f'token matched : {token}')
+        user.is_active = True
+        user.verification_token = None  
+        user.save()
+        login(request, user)
+        return render(request, 'email_verification.html')  
+    else:
+        return render(request, 'email_verification_failed.html')
+
+def congratulations(request):
+    return HttpResponse("Email Verified Suucessfully")
 
 def generate_signed_url(file_id):
     signer = Signer()
@@ -43,20 +88,6 @@ def list_files_page(request):
         files_and_urls = zip(files, signed_urls)  # Combine files and signed URLs
         return render(request, 'list_files.html', {'files_and_urls': files_and_urls})
     return redirect('signin')
-
-def signup_page(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        user_type = request.POST['user_type']
-
-        user = Person.objects.create_user(username=username, email=email, password=password, user_type=user_type)
-        Token.objects.get_or_create(user=user)
-        return redirect('signin')
-
-    return render(request, 'signup.html')
-
 
 def signin_page(request):
     if request.method == "POST":

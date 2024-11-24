@@ -8,7 +8,8 @@ class Person(AbstractUser):
         ('client', 'Client User'),
     ]
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    email_verified = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    verification_token = models.CharField(max_length=64, null=True, blank=True)
 
     user_permissions = models.ManyToManyField(
         'auth.Permission', 
