@@ -1,52 +1,83 @@
-Django Application
+# File Sharing System
 
-Overview:
-A web application built using Django that provides file sharing facility
-Features:
+This project is a file sharing application built with Django and Django Rest Framework. It allows users to upload and download .pptx, .docx, and .xlsx files.
 
-[Feature 1]
-[Feature 2]
-[Feature 3]
-Prerequisites:
+## Features
+- Ops User
+  can upload files
+- Client User
+  can view all available files and download them
 
-Python 3.8+
-Django 4.x
-Virtual Environment (recommended)
-Setup:
+## Technologies
+- Python
+- Django
+- Django Rest Framework
+- SQLite (or other databases)
+- HTML/CSS for the frontend
 
-Clone the repository:
-git clone <repository-url>
-cd <project-directory>
+## Setup Instructions
 
-Create and activate a virtual environment:
-python -m venv venv
-source venv/bin/activate # On Windows: venv\Scripts\activate
-
-Install dependencies:
+## Install Dependencies:
 pip install -r requirements.txt
 
-Apply migrations:
+## Apply Migrations:
 python manage.py migrate
 
-Start the development server:
+## Create a Superuser (Optional):
+python manage.py createsuperuser
+
+## To start the development server, run:
 python manage.py runserver
 
-Usage:
-Visit http://127.0.0.1:8000 in your browser.
+You can access the application at http://127.0.0.1:8000/.
 
-Testing:
-Run tests using:
-python manage.py test
+## API Endpoints
 
-Contributing:
+- User Management (Create User)
+  
+URL: /users/create/
+Method: POST
 
-Fork the repository.
-Create a feature branch:
-git checkout -b feature-name
-Commit changes and push:
-git commit -m "Description"
-git push origin feature-name
-Submit a pull request.
-License:
-[Specify your license here]
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "strongpassword123"
+}
 
+- Task Management (Create Task)
+  
+URL: /tasks/create/
+Method: POST
+
+{
+        "name": "Setup CI/CD Pipeline",
+        "description": "Automate deployments using Jenkins and Docker.",
+        "task_type": "DevOps",
+}
+
+- Assign Task to Users
+  
+URL: /tasks/<int:task_id>/assign/
+Method: POST
+{
+  "user_ids": [1, 2]
+}
+
+- Get Tasks for a User
+  
+URL: /users/<int:user_id>/tasks/
+Method: GET
+Response:
+
+{
+  "user_id": 1,
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Fix API bug",
+      "description": "Resolve the issue with the task assignment API.",
+      "due_date": "2024-10-25",
+      "priority": "High"
+    }
+  ]
+}
