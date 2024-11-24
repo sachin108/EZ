@@ -38,3 +38,17 @@
     cloud providers.
     
     It integrates seamlessly with continuous integration and delivery pipelines, enabling automated testing and deployment. 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+I have added email verification as well, its working fine but the integration is not done completely (because of the submission deadline).
+
+Flow of application:
+    1) Run the following commands before starting the app:
+        python manage.py makemigrations file_sharing_system
+        python manage.py migrate
+    2) to start the application run 'python manage.py runserver'
+    3) SignUp as Ops user/ Client User
+    4) A link will be showing console i.e. email verification link , if you will click, you will be redirected to verify the email. 
+        You can access the link one time only, 2nd time it will be showing that Email verification failed (but verification has 
+        already done, check the console for that).
+    5) After loggin in you will be redirected to Upload Page/ Available Files page based on your user type.
