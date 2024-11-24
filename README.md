@@ -5,6 +5,8 @@ This project is a file sharing application built with Django and Django Rest Fra
 ## Features
 ### SignUp page
 There are 2 choices on sign up page: 1- Ops User, 2- Client User
+
 Ops User can only upload file.
+
 Client User can view all the available files and download them.
 
