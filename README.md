@@ -3,8 +3,8 @@
 This project is a file sharing application built with Django and Django Rest Framework. It allows users to upload and download .pptx, .docx, and .xlsx files.
 
 ## Features
-- Ops User
-  can upload files
+### Ops User
+can upload files
 - Client User
   can view all available files and download them
 
